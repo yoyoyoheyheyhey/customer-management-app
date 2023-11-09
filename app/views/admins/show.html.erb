@@ -1,0 +1,16 @@
+<h1>管理者情報詳細</h1>
+
+<%= flash[:notice] %>
+
+<p>
+  <strong>名前:</strong>
+  <%= @admin.name %>
+</p>
+
+<p>
+  <strong>メールアドレス:</strong>
+  <%= @admin.email %>
+</p>
+
+<%= link_to '編集', edit_admin_path(@admin) %> |
+<%= link_to '一覧に戻る', admins_path %>
