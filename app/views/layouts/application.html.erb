@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <ul>
+      <li><%= link_to '管理者', admins_path %></li>
+      <li><%= link_to '顧客', customers_path %></li>      
+    </ul>
     <%= yield %>
   </body>
 </html>

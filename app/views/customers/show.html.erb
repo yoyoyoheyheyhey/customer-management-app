@@ -1,0 +1,21 @@
+<h1>顧客情報詳細</h1>
+
+<%= flash[:notice] %>
+
+<p>
+  <strong>名前:</strong>
+  <%= @customer.name %>
+</p>
+
+<p>
+  <strong>電話番号:</strong>
+  <%= @customer.phone_number %>
+</p>
+
+<p>
+  <strong>備考:</strong>
+  <%= @customer.remarks %>
+</p>
+
+<%= link_to '編集', edit_customer_path(@customer) %> |
+<%= link_to '一覧に戻る', customers_path %>

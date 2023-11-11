@@ -1,0 +1,16 @@
+<!-- app/views/users/new.html.erb -->
+<h1>顧客新規作成</h1>
+
+<%= flash[:alert] %>
+
+<% if @customer.errors.any? %>
+  <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form', customer: @customer %>
+
+<%= link_to '戻る', customers_path %>
