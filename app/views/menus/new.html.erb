@@ -1,0 +1,16 @@
+<!-- app/views/users/new.html.erb -->
+<h1>メニュー新規作成</h1>
+
+<%= flash[:alert] %>
+
+<% if @menu.errors.any? %>
+  <ul>
+    <% @menu.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form', menu: @menu %>
+
+<%= link_to '戻る', menus_path %>
