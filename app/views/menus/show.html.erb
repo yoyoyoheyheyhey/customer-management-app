@@ -1,0 +1,16 @@
+<h1>メニュー詳細</h1>
+
+<%= flash[:notice] %>
+
+<p>
+  <strong>メニュー名:</strong>
+  <%= @menu.name %>
+</p>
+
+<p>
+  <strong>価格:</strong>
+  <%= @menu.price %>
+</p>
+
+<%= link_to '編集', edit_menu_path(@menu) %> |
+<%= link_to '一覧に戻る', menus_path %>
