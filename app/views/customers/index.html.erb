@@ -22,6 +22,7 @@
           <td><%= customer.name %></td>
           <td><%= customer.phone_number %></td>
           <td><%= customer.remarks %></td>
+          <td><%= image_tag customer.avatar.variant(resize: '200x200') %></td>
           <td><%= link_to '表示', customer %></td>
           <td><%= link_to '編集', edit_customer_path(customer) %></td>
           <td><%= link_to '削除', customer_path(customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %></td>
