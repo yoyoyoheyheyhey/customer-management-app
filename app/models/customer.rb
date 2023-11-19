@@ -11,6 +11,7 @@
 
 class Customer < ApplicationRecord
   has_one_attached :avatar
+  has_many :customer_visit_histories, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :phone_number, presence: true, length: { maximum: 25 }

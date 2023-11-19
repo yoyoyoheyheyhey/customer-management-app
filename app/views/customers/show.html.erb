@@ -17,9 +17,16 @@
   <%= @customer.remarks %>
 </p>
 
-<p>   
+<p>
   <strong>画像:</strong>
   <%= image_tag @customer.avatar.variant(resize: '200x200') %>
+</p>
+
+<p>
+  <strong>来店履歴:</strong>
+  <% @customer.customer_visit_histories.each do |customer| %>
+    <p><%= customer.visit_datetime %></p>
+  <% end %>
 </p>
 
 <%= link_to '編集', edit_customer_path(@customer) %> |
