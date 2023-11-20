@@ -17,19 +17,17 @@
   <tbody>
     <% if @customers %>
       <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.id %></td>
-          <td><%= customer.name %></td>
-          <td><%= customer.phone_number %></td>
-          <td><%= customer.remarks %></td>
-          <td><%= image_tag customer.avatar.variant(resize: '200x200') %></td>
-          <td><%= link_to '表示', customer %></td>
-          <td><%= link_to '編集', edit_customer_path(customer) %></td>
-          <td><%= link_to '削除', customer_path(customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %></td>
-        </tr>
+        <%= link_to customer do %>
+          <tr>
+            <td><%= link_to customer.id, customer_path(customer) %></td>
+            <td><%= link_to customer.name, customer_path(customer) %></td>
+            <td><%= link_to customer.phone_number, customer_path(customer) %></td>
+            <td><%= link_to customer.remarks, customer_path(customer) %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to '新規作成', new_customer_path %>
+<%= link_to '顧客登録', new_customer_path %>

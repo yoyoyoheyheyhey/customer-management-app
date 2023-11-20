@@ -18,11 +18,6 @@
 </p>
 
 <p>
-  <strong>画像:</strong>
-  <%= image_tag @customer.avatar.variant(resize: '200x200') %>
-</p>
-
-<p>
   <strong>来店履歴:</strong>
   <% @customer.customer_visit_histories.each do |customer| %>
     <p><%= customer.visit_datetime %></p>
@@ -30,4 +25,5 @@
 </p>
 
 <%= link_to '編集', edit_customer_path(@customer) %> |
-<%= link_to '一覧に戻る', customers_path %>
+<%= link_to '削除', customer_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
+<%= link_to '戻る', customers_path %>
