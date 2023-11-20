@@ -11,6 +11,7 @@
 
 class Admin < ApplicationRecord
   has_secure_password
+  has_one_attached :icon
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, uniqueness: true

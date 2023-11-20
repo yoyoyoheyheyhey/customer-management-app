@@ -20,6 +20,18 @@
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <div class="field">
+    <%= form.label :icon %>
+    <%= form.file_field :icon %>
+    <div>
+      <% if @admin.icon.attached? %>
+        <%= image_tag @admin.icon.variant(resize: '200x200') %>
+      <% else %>
+        <p>No image attached</p>
+      <% end %>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

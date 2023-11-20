@@ -3,9 +3,20 @@
 <%= flash[:notice] %>
 
 <p>
+  <strong>画像:</strong>
+  <div>
+    <% if @admin.icon.attached? %>
+      <%= image_tag @admin.icon.variant(resize: '200x200') %>
+    <% else %>
+      <p>No image attached</p>
+    <% end %>
+  </div>
+</p>
+
+<p>
   <strong>名前:</strong>
   <%= @admin.name %>
-</p>
+</p>  
 
 <p>
   <strong>メールアドレス:</strong>
@@ -13,4 +24,5 @@
 </p>
 
 <%= link_to '編集', edit_admin_path(@admin) %> |
-<%= link_to '一覧に戻る', admins_path %>
+<%= link_to '削除', admin_path(@admin), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
+<%= link_to '戻る', admins_path %>
