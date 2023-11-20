@@ -37,6 +37,7 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin.destroy!
+    @admin.icon.purge
     flash[:notice] = '管理者情報を削除しました'
     redirect_to admins_url
   end
