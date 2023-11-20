@@ -38,7 +38,6 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-    @customer.avatar.purge
 		flash[:notice] = '顧客情報を更新しました'
     redirect_to customers_url
   end
@@ -50,6 +49,6 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:name, :phone_number, :remarks, :avatar)
+    params.require(:customer).permit(:name, :phone_number, :remarks)
   end
 end
