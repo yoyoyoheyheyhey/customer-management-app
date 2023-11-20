@@ -17,16 +17,13 @@
     <% if @menus %>
       <% @menus.each do |menu| %>
         <tr>
-          <td><%= menu.id %></td>
-          <td><%= menu.name %></td>
-          <td><%= menu.price %></td>
-          <td><%= link_to '表示', menu %></td>
-          <td><%= link_to '編集', edit_menu_path(menu) %></td>
-          <td><%= link_to '削除', menu_path(menu), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %></td>
+          <td><%= link_to menu.id, menu_path(menu) %></td>
+          <td><%= link_to menu.name, menu_path(menu) %></td>
+          <td><%= link_to menu.price, menu_path(menu) %>円</td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to '新規作成', new_menu_path %>
+<%= link_to 'メニュー登録', new_menu_path %>

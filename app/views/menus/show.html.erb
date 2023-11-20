@@ -9,8 +9,9 @@
 
 <p>
   <strong>価格:</strong>
-  <%= @menu.price %>
+  <%= @menu.price %>円
 </p>
 
 <%= link_to '編集', edit_menu_path(@menu) %> |
-<%= link_to '一覧に戻る', menus_path %>
+<%= link_to '削除', menu_path(@menu), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
+<%= link_to '戻る', menus_path %>
