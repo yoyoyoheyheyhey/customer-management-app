@@ -9,6 +9,7 @@
 # updated_at        :datetime  null: false   precision: 6
 
 class Menu < ApplicationRecord
+  has_paper_trail
   has_many :selected_menu_snapshots
 
   validates :name, presence: true

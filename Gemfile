@@ -52,7 +52,11 @@ gem "bootsnap", require: false
 gem "image_processing"
 gem "mini_magick"
 
+# Use Tailwind CSS
 gem 'cssbundling-rails'
+
+# Use model snapshot
+gem 'paper_trail'
 
 
 group :development, :test do
