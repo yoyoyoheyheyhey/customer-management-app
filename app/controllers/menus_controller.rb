@@ -2,7 +2,7 @@ class MenusController < ApplicationController
   before_action :set_menu, only: %i[show edit update destroy]
 
   def index
-    @menus = Menu.all
+    @menus = Menu.order(:name)
   end
 
   def show

@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_action :set_admin, only: %i[show edit update destroy]
 
   def index
-    @admins = Admin.all
+    @admins = Admin.order(:name)
   end
 
   def show

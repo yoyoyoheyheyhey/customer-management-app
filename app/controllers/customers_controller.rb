@@ -2,10 +2,11 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show edit update destroy]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.order(:name)
   end
 
   def show
+    @customer_visit_histories = @customer.customer_visit_histories.preload(:selected_menu_snapshots).order(:visit_datetime)
   end
 
   def new
