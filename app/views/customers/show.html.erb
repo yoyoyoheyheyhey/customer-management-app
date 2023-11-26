@@ -19,8 +19,14 @@
 
 <p>
   <strong>来店履歴:</strong>
-  <% @customer.customer_visit_histories.each do |customer| %>
-    <p><%= customer.visit_datetime %></p>
+  <% @customer.customer_visit_histories.preload(:selected_menu_snapshots).each do |customer_visit_history| %>
+    <p><%= customer_visit_history.visit_datetime %></p>
+    <% customer_visit_history.selected_menu_snapshots.each do |selected_menu_snapshot| %>
+      <p><%= selected_menu_snapshot.name_at_time %></p>
+      <p><%= selected_menu_snapshot.price_at_time %></p>
+    <% end %>
+    <%= link_to '編集', edit_customer_visit_history_path(customer_visit_history.id) %> |
+    <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |    
   <% end %>
 </p>
 

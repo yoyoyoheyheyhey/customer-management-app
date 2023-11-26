@@ -1,0 +1,23 @@
+<%= form_with(model: customer_visit_history, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :customer_id, "Select Customer" %>
+    <%= form.collection_select :customer_id, Customer.all, :id, :name, { include_blank: 'Please Select' }, { required: true } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :visit_datetime, "Visit Date and Time" %>
+    <%= form.datetime_select :visit_datetime, {}, { required: true, aria: { invalid: 'false' } } %>
+  </div>
+
+  <% Menu.all.each do |menu| %>
+    <div>
+      <%= check_box_tag "menu_ids[]", menu.id, @customer_visit_history.selected_menu_snapshots.exists?(menu_id: menu.id), id: dom_id(menu) %>
+      <%= label_tag dom_id(menu), menu.name %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

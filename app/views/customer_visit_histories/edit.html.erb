@@ -1,0 +1,15 @@
+<h1>来店履歴の編集</h1>
+
+<%= flash[:alert] %>
+
+<% if @customer_visit_history.errors.any? %>
+  <ul>
+    <% @customer_visit_history.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form', customer_visit_history: @customer_visit_history %>
+
+<%= link_to 'キャンセル', customer_path(@customer) %>
