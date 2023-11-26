@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_19_044808) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_25_131859) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,7 +74,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_044808) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "selected_menu_snapshots", force: :cascade do |t|
+    t.string "name_at_time"
+    t.bigint "price_at_time"
+    t.bigint "customer_visit_history_id", null: false
+    t.bigint "menu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_visit_history_id", "menu_id"], name: "index_snapshots_on_customer_visit_history_id_and_menu_id", unique: true
+    t.index ["customer_visit_history_id"], name: "index_selected_menu_snapshots_on_customer_visit_history_id"
+    t.index ["menu_id"], name: "index_selected_menu_snapshots_on_menu_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "customer_visit_histories", "customers"
+  add_foreign_key "selected_menu_snapshots", "customer_visit_histories"
+  add_foreign_key "selected_menu_snapshots", "menus"
 end
