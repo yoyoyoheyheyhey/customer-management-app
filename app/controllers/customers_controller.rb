@@ -2,11 +2,13 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show edit update destroy]
 
   def index
-    @customers = Customer.order(:name)
+    @q = Customer.ransack(params[:q])
+    @customers = @q.result
   end
 
   def show
-    @customer_visit_histories = @customer.customer_visit_histories.preload(:selected_menu_snapshots).order(:visit_datetime)
+    @q = @customer.customer_visit_histories.preload(:selected_menu_snapshots).ransack(params[:q])
+    @customer_visit_histories = @q.result
   end
 
   def new

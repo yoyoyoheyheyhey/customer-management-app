@@ -58,6 +58,9 @@ gem 'cssbundling-rails'
 # Use model snapshot
 gem 'paper_trail'
 
+# Use Ransack
+gem 'ransack'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

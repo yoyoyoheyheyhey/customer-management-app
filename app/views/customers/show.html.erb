@@ -17,10 +17,13 @@
   <%= @customer.remarks %>
 </p>
 
+<p><th><%= sort_link(@q, :updated_at, "更新日時") %></th></p>
+<p><th><%= sort_link(@q, :created_at, "作成日時") %></th></p>
 <p>
   <strong>来店履歴:</strong>
   <% @customer_visit_histories.each do |customer_visit_history| %>
     <p><%= customer_visit_history.visit_datetime %></p>
+    <p>作成日時：<%= customer_visit_history.created_at %></p>
     <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
       <p><%= selected_menu_snapshot.name_at_time %></p>
       <p><%= selected_menu_snapshot.price_at_time %></p>

@@ -1,10 +1,11 @@
 class CustomerVisitHistoriesController < ApplicationController
   before_action :set_customer_visit_history, only: %i[edit update destroy]
   before_action :set_menus, only: %i[create update]
-  before_action :fetch_customer, only: %i[create edit update destory]
+  before_action :fetch_customer, only: %i[create edit update destroy]
 
   def new
     @customer_visit_history = CustomerVisitHistory.new
+    @customer_visit_history.selected_menu_snapshots.new
   end
 
   def create
@@ -33,7 +34,7 @@ class CustomerVisitHistoriesController < ApplicationController
     end
   end  
 
-  def destroy
+def destroy
     @customer_visit_history.destroy
 		flash[:notice] = '来店履歴を削除しました'
     redirect_to @customer
@@ -55,6 +56,6 @@ class CustomerVisitHistoriesController < ApplicationController
     end
 
     def customer_visit_history_params
-      params.require(:customer_visit_history).permit(:customer_id, :visit_datetime)
+      params.require(:customer_visit_history).permit(:customer_id, :visit_datetime, selected_menu_snapshots: [:name_at_time, :price_at_time])
     end
 end

@@ -2,7 +2,8 @@ class AdminsController < ApplicationController
   before_action :set_admin, only: %i[show edit update destroy]
 
   def index
-    @admins = Admin.order(:name)
+    @q = Admin.ransack(params[:q])
+    @admins = @q.result
   end
 
   def show

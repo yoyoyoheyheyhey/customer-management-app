@@ -2,7 +2,8 @@ class MenusController < ApplicationController
   before_action :set_menu, only: %i[show edit update destroy]
 
   def index
-    @menus = Menu.order(:name)
+    @q = Menu.ransack(params[:q])
+    @menus = @q.result
   end
 
   def show
