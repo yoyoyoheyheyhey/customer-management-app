@@ -23,6 +23,6 @@
   <%= @admin.email %>
 </p>
 
-<%= link_to '編集', edit_admin_path(@admin) %> |
-<%= link_to '削除', admin_path(@admin), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
+<%= link_to '編集', edit_admin_registration_path %> |
+<%= link_to '削除', admins_path, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
 <%= link_to '戻る', admins_path %>

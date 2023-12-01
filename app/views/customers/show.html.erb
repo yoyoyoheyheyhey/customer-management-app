@@ -33,5 +33,5 @@
 </p>
 
 <%= link_to '編集', edit_customer_path(@customer) %> |
-<%= link_to '削除', customer_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
+<%= link_to '削除', customers_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
 <%= link_to '戻る', customers_path %>
