@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :menu do
-    name { "menu" }
-    price { 99999 }
+    name { Faker::Commerce.product_name }
+    price { Faker::Commerce.price }
   end
 end

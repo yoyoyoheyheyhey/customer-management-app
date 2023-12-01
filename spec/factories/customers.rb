@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :customer do
-    name { "customer" }
-    phone_number { "08011112222" }
-    remarks { "This is customer information created for testing purposes." }    
+    name { Faker::Name.name }
+    phone_number { Faker::PhoneNumber.phone_number }
+    remarks { Faker::Lorem.sentences(number: 3).join(' ') }    
   end
 end
