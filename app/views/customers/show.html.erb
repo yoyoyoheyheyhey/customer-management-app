@@ -1,37 +1,84 @@
-<h1>顧客情報詳細</h1>
+<h1 class="text-3xl text-gray-700">顧客情報詳細</h1>
 
 <%= flash[:notice] %>
 
-<p>
-  <strong>名前:</strong>
-  <%= @customer.name %>
-</p>
-
-<p>
-  <strong>電話番号:</strong>
-  <%= @customer.phone_number %>
-</p>
-
-<p>
-  <strong>備考:</strong> 
-  <%= @customer.remarks %>
-</p>
-
-<p><th><%= sort_link(@q, :updated_at, "更新日時") %></th></p>
-<p><th><%= sort_link(@q, :created_at, "作成日時") %></th></p>
-<p>
-  <strong>来店履歴:</strong>
-  <% @customer_visit_histories.each do |customer_visit_history| %>
-    <p><%= customer_visit_history.visit_datetime %></p>
-    <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
-      <p><%= selected_menu_snapshot.name_at_time %></p>
-      <p><%= selected_menu_snapshot.price_at_time %></p>
-    <% end %>
-    <%= link_to '編集', edit_customer_visit_history_path(customer_visit_history.id) %> |
-    <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |    
-  <% end %>
-</p>
-
-<%= link_to '編集', edit_customer_path(@customer) %> |
-<%= link_to '削除', customers_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' } %> |
-<%= link_to '戻る', customers_path %>
+<div class="py-20">
+  <div class="flex bg-white border rounded shadow-md p-10">
+    <div class="mt-3">
+      <div>
+        <div class="flex flex-col bg-white">
+          <div class="flex items-center pb-6">
+            <p class="text-gray-500 w-60 py-5">
+              顧客名
+            </p>
+            <p class="text-gray-500 border-b border-gray-300 flex-1 w-96 py-5">
+              <%= @customer.name %>
+            </p>
+          </div>
+          <div class="flex items-center py-6">
+            <p class="text-gray-500 w-60 py-5">
+              電話番号
+            </p>
+            <p class="text-gray-500 border-b border-gray-300 flex-1 w-96 py-5">
+              <%= @customer.phone_number %>
+            </p>
+          </div>
+          <div class="flex items-center py-6">
+            <p class="text-gray-500 w-60 py-5">
+              備考
+            </p>
+            <p class="text-gray-500 border-b border-gray-300 flex-1 w-96 py-5">
+              <%= @customer.remarks %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-20 space-x-1">
+        <%= link_to "編集", edit_customer_path(@customer), class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
+        <%= link_to "削除", customers_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+        <%= link_to "戻る", customers_path, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none" %>
+      </div>
+    </div>
+  </div>
+  <div class="pt-20">
+    <h2 class="text-xl font-bold text-gray-700 pb-6">来店履歴</h2>
+    <div class="flex space-x-4 w-3/12">
+      <%= sort_link(@q, :updated_at, "更新日順") do %>
+        <div class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-gray-500 rounded-lg hover:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-600">
+          <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+          <p>更新日順</p>
+        </div>
+      <% end %>
+      <%= sort_link(@q, :created_at, "作成日時順") do %>
+        <div class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-gray-500 rounded-lg hover:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-600">
+          <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <p>作成日順</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="flex flex-col w-3/12">
+      <% @customer_visit_histories.each do |customer_visit_history| %>
+        <div class="bg-white rounded shadow-md border p-10 my-2">
+          <div class="w-full flex items-center gap-x-3.5 py-2 text-gray-500 rounded-lg hover:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-600">
+            <p><%= customer_visit_history.visit_datetime.strftime("%Y年%m月%d日") %><span class=px-1></span><%= customer_visit_history.visit_datetime.strftime("%k:%M") %></p>
+          </div>
+          <div class="my-8">
+            <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
+              <li class="w-full inline-flex items-center gap-x-2 py-2 text-sm text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg">
+                <div class="flex items-center justify-between w-full">
+                  <span><%= selected_menu_snapshot.name_at_time %></span>
+                  <span><%= selected_menu_snapshot.price_at_time %>円</span>
+                </div>
+              </li>
+              <p></p>
+            <% end %>
+          </div>
+          <div class="mt-8 space-x-1">
+            <%= link_to '編集', edit_customer_visit_history_path(customer_visit_history.id), class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
+            <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

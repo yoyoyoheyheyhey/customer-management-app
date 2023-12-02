@@ -1,33 +1,42 @@
-<h1>顧客情報一覧</h1>
+<h1 class="text-3xl text-gray-700">顧客</h1>
 
 <%= flash[:notice] %>
 <%= flash[:alert] %>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= sort_link(@q, :id, "ID") %></th>
-      <th><%= sort_link(@q, :name, "名前") %></th>
-      <th>電話番号</th>
-      <th>備考</th>
-      <th colspan="6"></th>
-    </tr>
-  </thead>
+<div class="flex flex-col py-10">
+  <div class="-m-1.5 overflow-x-auto">
+    <div class="p-1.5 min-w-full inline-block align-middle">
+      <div class="border overflow-hidden dark:border-gray-100 shadow-md rounded">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-white">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :id, "ID") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :name, "名前") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">電話番号</th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">備考</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% if @customers %>
+              <% @customers.each do |customer| %>
+                <tr class="hover:bg-gray-50 bg-white">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.id, customer_path(customer) %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.name, customer_path(customer) %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.phone_number, customer_path(customer) %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.remarks, customer_path(customer) %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% if @customers %>
-      <% @customers.each do |customer| %>
-        <%= link_to customer do %>
-          <tr>
-            <td><%= link_to customer.id, customer_path(customer) %></td>
-            <td><%= link_to customer.name, customer_path(customer) %></td>
-            <td><%= link_to customer.phone_number, customer_path(customer) %></td>
-            <td><%= link_to customer.remarks, customer_path(customer) %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to '顧客登録', new_customer_path %>
+<%= link_to(new_customer_path) do %>
+  <div class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-gray-500 rounded-lg hover:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-600">
+    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <p>顧客登録</p>
+  </div>
+<% end %>

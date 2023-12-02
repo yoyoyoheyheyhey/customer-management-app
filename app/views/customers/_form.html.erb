@@ -1,21 +1,28 @@
-<!-- app/views/users/_form.html.erb -->
-<%= form_with(model: customer, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<div class="bg-white pt-10 flex">
+  <%= form_with(model: customer, local: true) do |f| %>
+    <div class="pb-8">
+      <div class="flex justify-between">
+        <%= f.label "顧客名", class: "block text-sm font-medium mb-2" %>
+      </div>
+      <%= f.text_field :name, class: "py-3 pl-4 pr-20 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "顧客名"  %>
+    </div>
 
-  <div class="field">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
+    <div class="pb-8">
+      <div class="flex justify-between">
+        <%= f.label "電話番号", class: "block text-sm font-medium mb-2" %>
+      </div>
+      <%= f.text_field :phone_number, class: "py-3 pl-4 pr-20 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "08012345678"  %>
+    </div>
 
-  <div class="field">
-    <%= form.label :remarks %>
-    <%= form.text_area :remarks %>
-  </div>
+    <div class="pb-8">
+      <div class="flex justify-between">
+        <%= f.label "備考", class: "block text-sm font-medium mb-2" %>
+      </div>
+      <%= f.text_area :remarks, class: "py-3 pl-4 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "スパイラルパーをよく注文する"  %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="py-8">
+      <%= f.submit "登録", class: "block py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none" %>
+    </div>
+  <% end %>
+</div>

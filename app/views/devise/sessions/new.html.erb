@@ -1,26 +1,34 @@
-<h2>Log in</h2>
+<h1 class="text-3xl text-gray-700 text-center">ログイン</h1>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="text-center bg-white px-32 py-20">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="pb-8">
+      <div class="flex justify-between items-center">
+        <%= f.label "メールアドレス", class: "block text-sm font-medium mb-2" %>
+      </div>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "py-3 px-4 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "you@site.com"  %>
+    </div>
+    <div class="pb-8">
+      <div class="flex justify-between items-center">
+        <%= f.label "パスワード", class: "block text-sm font-medium mb-2" %>
+        <!-- <% if @minimum_password_length %> -->
+          <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
+        <!-- <% end %> -->
+      </div>
+      <%= f.password_field :password, autocomplete: "new-password", class: "py-3 px-4 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "Password123"  %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <%# if devise_mapping.rememberable? %>
+      <%# <div class="field"> %>
+        <%# f.check_box :remember_me %>
+        <%# f.label :remember_me %>
+      <%# </div> %>
+    <%# end %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="py-20">
+      <%= f.submit "ログイン", class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none" %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+</div>
 
 <%= render "devise/shared/links" %>

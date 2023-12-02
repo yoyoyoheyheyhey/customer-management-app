@@ -1,5 +1,4 @@
-<!-- app/views/users/new.html.erb -->
-<h1>メニュー新規作成</h1>
+<h1 class="text-3xl text-gray-700">メニュー登録</h1>
 
 <%= flash[:alert] %>
 
@@ -13,4 +12,9 @@
 
 <%= render 'form', menu: @menu %>
 
-<%= link_to '戻る', menus_path %>
+<%= link_to(menus_path) do %>
+  <div class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-gray-500 rounded-lg hover:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-600">
+    <p>戻る</p>
+  </div>
+<% end %>
+
