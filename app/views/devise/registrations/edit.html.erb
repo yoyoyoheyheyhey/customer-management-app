@@ -4,59 +4,57 @@
   <div class="flex justify-center bg-white border rounded shadow-md p-10">
     <div class="bg-white py-8 w-3/12 items-center">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
         <%= render "devise/shared/error_messages", resource: resource %>
-      <div>
-        <div class="flex justify-center">
-          <%= f.label :icon, class: "text-sm font-medium" %>
-        </div>
-        <div class="pb-5 flex justify-center">
-          <label class="text-center cursor-pointer">
-            <% if @admin.icon.attached? %>
-              <%= image_tag @admin.icon.variant(resize: '200x200'), id: "existing", class: "border border-gray-300 rounded-full w-40 h-40"  %>
-              <div id="preview"></div>
-            <% else %>
-              <svg id="existing" class="rounded-full w-40 h-40 text-gray-400 hover:text-opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" /></svg>
-              <div id="preview"></div>
-            <% end %>
-            <%= f.file_field :icon, direct_upload: true, id: "image-upload", class: "hidden"%>
-          </label>
-        </div>
+        <div>
+          <div class="flex justify-center">
+            <%= f.label :icon, class: "text-sm font-medium" %>
+          </div>
+          <div class="pb-5 flex justify-center">
+            <label class="text-center cursor-pointer">
+              <% if @admin.icon.attached? %>
+                <%= image_tag @admin.icon.variant(resize: '200x200'), id: "existing", class: "border border-gray-300 rounded-full w-40 h-40"  %>
+                <div id="preview"></div>
+              <% else %>
+                <svg id="existing" class="rounded-full w-40 h-40 text-gray-400 hover:text-opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" /></svg>
+                <div id="preview"></div>
+              <% end %>
+              <%= f.file_field :icon, direct_upload: true, id: "image-upload", class: "hidden"%>
+            </label>
+          </div>
 
-        <div class="flex flex-col pb-8">
-          <%= f.label :name, class: "block text-sm font-medium mb-2" %>
-          <%= f.text_field :name, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "name" %>
-        </div>
+          <div class="flex flex-col pb-8">
+            <%= f.label :name, class: "block text-sm font-medium mb-2" %>
+            <%= f.text_field :name, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "name" %>
+          </div>
 
-        <div class="flex flex-col pb-8">
-          <%= f.label :email, class: "block text-sm font-medium mb-2" %>
-          <%= f.email_field :email, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "email" %>
-        </div>
+          <div class="flex flex-col pb-8">
+            <%= f.label :email, class: "block text-sm font-medium mb-2" %>
+            <%= f.email_field :email, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "email" %>
+          </div>
 
-        <div class="flex flex-col pb-8">
-          <%= f.label :password, class: "block text-sm font-medium mb-2" %>
-          <%= f.password_field :password, autocomplete: "new-password", class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" %>
-        </div>
+          <div class="flex flex-col pb-8">
+            <%= f.label :password, class: "block text-sm font-medium mb-2" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" %>
+          </div>
 
-        <div class="flex flex-col pb-8">
-          <%= f.label :password_confirmation, class: "block text-sm font-medium mb-2" %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" %>
-        </div>
+          <div class="flex flex-col pb-8">
+            <%= f.label :password_confirmation, class: "block text-sm font-medium mb-2" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" %>
+          </div>
 
-        <div class="flex flex-col pb-8">
-          <%= f.label :current_password, class: "block text-sm font-medium mb-2" %>
-          <%= f.password_field :current_password, autocomplete: "current-password", class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" %>
-        </div>
+          <div class="flex flex-col pb-8">
+            <%= f.label :current_password, class: "block text-sm font-medium mb-2" %>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" %>
+          </div>
 
-        <div class="mt-8 flex justify-center space-x-2">
-          <%= f.submit "更新", class: "block py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-00 disabled:opacity-50 disabled:pointer-events-none cursor-pointer" %>
-          <%= button_to "削除", registration_path(resource_name), data: { method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+          <div class="mt-8 flex justify-center space-x-2">
+            <%= f.submit "更新", class: "block py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-00 disabled:opacity-50 disabled:pointer-events-none cursor-pointer" %>
+            <%= button_to "削除", registration_path(resource_name), data: { method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+          </div>
+          <div class="mt-8 flex justify-center">
+            <%= link_to "戻る", admin_path(@admin), class: "text-gray-500 hover:text-gray-600" %>
+          </div>
         </div>
-        <div class="mt-8 flex justify-center">
-          <%= link_to "戻る", admin_path(@admin), class: "text-gray-500 hover:text-gray-600" %>
-        </div>
-      </div>
-
       <% end %>
     </div>
   </div>
