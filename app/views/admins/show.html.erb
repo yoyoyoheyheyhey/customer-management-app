@@ -35,8 +35,8 @@
       </div>
     </div>
       <div class="flex justify-center space-x-1">
-        <%= link_to "編集", edit_admin_registration_path, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
-        <% if current_admin.id === @admin %>
+        <% if current_admin.id === @admin.id %>
+          <%= link_to "編集", edit_admin_registration_path, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
           <%= link_to "削除", admin_path(@admin), class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
         <% end %>
       </div>
