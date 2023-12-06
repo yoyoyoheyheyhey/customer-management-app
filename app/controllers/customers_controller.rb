@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show edit update destroy]
+  before_action :set_customer_visit_history, only: %i[show]
 
   def index
     @q = Customer.ransack(params[:q])
@@ -49,6 +50,10 @@ class CustomersController < ApplicationController
 
   def set_customer
     @customer = Customer.find(params[:id])
+  end
+
+  def set_customer_visit_history
+    @customer_visit_history = CustomerVisitHistory.find_by(customer_id: params[:id])
   end
 
   def customer_params
