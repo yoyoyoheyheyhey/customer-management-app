@@ -24,11 +24,11 @@
           <tbody class="divide-y divide-gray-200">
             <% if @customers %>
               <% @customers.each do |customer| %>
-                <tr class="hover:bg-gray-50 bg-white">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.id, customer_path(customer) %></td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.name, customer_path(customer) %></td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.phone_number, customer_path(customer) %></td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= link_to customer.remarks, customer_path(customer) %></td>
+                <tr onclick="window.location='<%= customer_path(customer) %>'" class="hover:bg-gray-50 bg-white cursor-pointer">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.id %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.phone_number %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.remarks %></td>
                 </tr>
               <% end %>
             <% end %>
