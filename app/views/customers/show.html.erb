@@ -44,7 +44,16 @@
     </div>
   </div>
   <div class="pt-20 flex flex-col">
-    <h2 class="text-2xl text-gray-700 pb-6">来店履歴</h2>
+    <div class="w-full flex" style="justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h2 class="text-2xl text-gray-700 pb-6">来店履歴</h2>
+      <%=
+        link_to "来店履歴作成",
+        new_customer_visit_history_path(customer_id: @customer.id),
+        class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+        style: "width: 120px;"
+      %>
+    </div>
+
     <div class="flex flex-col justify-center bg-white border rounded shadow-md p-20 space-y-5">
       <% if @customer_visit_history %>
         <div class="flex space-x-5">
