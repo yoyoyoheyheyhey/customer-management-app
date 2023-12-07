@@ -3,5 +3,5 @@ import "./image_preview"
 import "@hotwired/turbo-rails"
 import "controllers"
 import "@rails/ujs"
-import 'preline';
+// import 'preline'
 Rails.start()
