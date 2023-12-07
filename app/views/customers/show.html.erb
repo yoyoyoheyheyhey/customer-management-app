@@ -4,35 +4,29 @@
 
 <div class="py-8">
   <div class="flex flex-col bg-white border rounded shadow-md py-20">
-    <div class="flex justify-center bg-white">
-      <div class="flex flex-col w-8/12">
-        <div class="flex justify-center pb-6 space-x-10">
-          <p class="text-end text-gray-700 w-1/12 py-5">
-            顧客名
-          </p>
-          <p class="text-center text-gray-700 border-b border-gray-300 w-5/12 py-5">
+    <div class="flex justify-center">
+      <div class="w-3/12">
+        <div class="flex flex-col pb-8">
+          <p class="text-sm font-medium mb-2">顧客名</p>
+          <p class="text-center py-3 border block w-full border-gray-300 rounded text-sm">
             <%= @customer.name %>
           </p>
         </div>
-        <div class="flex justify-center py-6 space-x-10">
-          <p class="text-end text-gray-700 w-1/12 py-5">
-            電話番号
-          </p>
-          <p class="text-center text-gray-700 border-b border-gray-300 w-5/12 py-5">
+        <div class="flex flex-col pb-8">
+          <p class="text-sm font-medium mb-2">電話番号</p>
+          <p class="text-center py-3 border block w-full border-gray-300 rounded text-sm">
             <%= @customer.phone_number %>
           </p>
         </div>
-        <div class="flex justify-center py-6 space-x-10">
-          <p class="text-end text-gray-700 w-1/12 py-5">
-            備考
-          </p>
-          <p class="text-center text-gray-700 border-b border-gray-300 w-5/12 py-5">
+        <div class="flex flex-col pb-8">
+          <p class="text-sm font-medium mb-2">備考</p>
+          <p class="text-center py-10 border block w-full border-gray-300 rounded text-sm">
             <%= @customer.remarks %>
           </p>
         </div>
       </div>
     </div>
-    <div class="flex justify-center mt-16 space-x-2">
+    <div class="flex justify-center mt-10 space-x-2">
       <%= link_to "編集", edit_customer_path(@customer), class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
       <%= link_to "削除", customer_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
     </div>
@@ -54,30 +48,30 @@
             <%= sort_link(@q, :created_at, "作成日時順") %>
           </div>
         </div>
+        <div class="grid grid-cols-4 gap-4">
+          <% @customer_visit_histories.each do |customer_visit_history| %>
+            <div class="flex flex-col bg-white border border-gray-300 py-5 my-2 hover:bg-gray-50">
+              <div class="flex justify-center items-center text-gray-800">
+                <p class="text-md font-semibold text-gray-600"><%= customer_visit_history.visit_datetime.strftime("%Y年%m月%d日(%a)") %><span class=px-1></span><%= customer_visit_history.visit_datetime.strftime("%k:%M") %></p>
+              </div>
+              <div class="flex-1 my-10">
+                <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
+                  <li class="flex justify-center space-x-10 text-sm text-gray-800">
+                    <p><%= selected_menu_snapshot.name_at_time %></p>
+                    <p><%= selected_menu_snapshot.price_at_time %>円</p>
+                  </li>
+                <% end %>
+              </div>
+              <div class="flex justify-center space-x-2 items-center">
+                <%= link_to '編集', edit_customer_visit_history_path(customer_visit_history.id), class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
+                <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% else %>
-        <p class="text-center text-gray-700">現在、履歴はありません</p>
+        <p class="text-center text-gray-700">来店履歴はありません</p>
       <% end %>
-      <div class="grid grid-cols-4 gap-4">
-        <% @customer_visit_histories.each do |customer_visit_history| %>
-          <div class="flex flex-col bg-white rounded shadow-md border py-5 my-2">
-            <div class="flex justify-center items-center text-gray-800">
-              <p class="text-md"><%= customer_visit_history.visit_datetime.strftime("%Y年%m月%d日(%a)") %><span class=px-1></span><%= customer_visit_history.visit_datetime.strftime("%k:%M") %></p>
-            </div>
-            <div class="flex-1 my-10">
-              <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
-                <li class="flex justify-center space-x-10 text-sm text-gray-800">
-                  <p><%= selected_menu_snapshot.name_at_time %></p>
-                  <p><%= selected_menu_snapshot.price_at_time %>円</p>
-                </li>
-              <% end %>
-            </div>
-            <div class="flex justify-center space-x-2 items-center">
-              <%= link_to '編集', edit_customer_visit_history_path(customer_visit_history.id), class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
-              <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>

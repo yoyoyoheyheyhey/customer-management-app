@@ -1,42 +1,34 @@
 <h1 class="text-3xl text-gray-700 text-center">新規登録</h1>
 
-<div class="text-center bg-white px-32 py-20">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <div class="pb-8 text-red-600">
+<div class="flex justify-center">
+  <div class="bg-white py-8 w-5/12 items-center">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-    </div>
-    <div class="pb-8">
-      <div class="flex justify-between items-center">
-        <%= f.label "名前", class: "block text-sm font-medium mb-2" %>
-      </div>
-      <%= f.text_field :name, class: "py-3 pl-4 pr-20 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "氏名"  %>
-    </div>
-    <div class="pb-8">
-      <div class="flex justify-between items-center">
-        <%= f.label "メールアドレス", class: "block text-sm font-medium mb-2" %>
-      </div>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "py-3 px-4 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "you@site.com"  %>
-    </div>
-    <div class="pb-8">
-      <div class="flex justify-between items-center">
-        <%= f.label "パスワード", class: "block text-sm font-medium mb-2" %>
-        <!-- <% if @minimum_password_length %> -->
-          <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
-        <!-- <% end %> -->
-      </div>
-      <%= f.password_field :password, autocomplete: "new-password", class: "py-3 px-4 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "Password123"  %>
-    </div>
-    <div class="pb-8">
-      <div class="flex justify-between items-center">
-        <%= f.label "パスワード（確認）", class: "block text-sm font-medium mb-2" %>
-      </div>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "py-3 px-4 border block w-full border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", :placeholder => "Password123"  %>
-    </div>
+      <div>
+        <div class="flex flex-col pb-8">
+          <%= f.label :name, class: "text-start text-sm font-medium mb-2" %>
+          <%= f.text_field :name, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "name", :placeholder => "佐藤 太郎" %>
+        </div>
+        <div class="flex flex-col pb-8">
+          <%= f.label :email, class: "text-start text-sm font-medium mb-2" %>
+          <%= f.email_field :email, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "email", :placeholder => "you@site.com"  %>
+        </div>
+        <div class="flex flex-col pb-8">
+          <%= f.label :password, class: "text-start text-sm font-medium mb-2" %>
+          <%= f.password_field :password, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "new-password", :placeholder => "Password123"  %>
+        </div>
+        <div class="flex flex-col pb-8">
+          <%= f.label :password_confirmation, class: "text-start text-sm font-medium mb-2" %>
+          <%= f.password_field :password_confirmation, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "new-password", :placeholder => "Password123"  %>
+        </div>
 
-    <div class="py-8">
-      <%= f.submit "新規登録", class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none" %>
-    </div>
-  <% end %>
+        <div class="mt-8 flex justify-center">
+          <%= f.submit "新規登録", class: "block py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-gray-900 text-white hover:bg-gray-700 cursor-pointer" %>
+        </div>
+      </div>
+      <div class="mt-8 flex justify-center">
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= render "devise/shared/links" %>
