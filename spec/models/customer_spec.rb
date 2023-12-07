@@ -13,6 +13,10 @@ RSpec.describe Customer, type: :model do
     it { should validate_length_of(:phone_number).is_at_most(25) }
   end
 
+  describe 'associations' do
+    it { should have_one_attached(:image) }
+  end
+
   describe '.ransackable_attributes' do
     it 'returns the correct array of attributes' do
       expect(Customer.ransackable_attributes).to eq(["created_at", "id", "name", "phone_number", "remarks", "updated_at"])
