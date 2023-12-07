@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: %i[show edit update destroy destroy_icon]
+  before_action :set_admin, only: %i[show edit update destroy]
 
   def index
     @q = Admin.ransack(params[:q])
@@ -38,14 +38,8 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin.destroy!
-    @admin.icon.purge
     flash[:notice] = '管理者情報を削除しました'
     redirect_to admins_url
-  end
-
-  def destroy_icon
-    @admin.icon.purge
-    redirect_to admin_path(@admin), notice: '画像が削除されました。'
   end
 
     private
@@ -55,6 +49,6 @@ class AdminsController < ApplicationController
       end
 
       def admin_params
-        params.require(:admin).permit(:name, :email, :password, :password_confirmation, :icon)
+        params.require(:admin).permit(:name, :email, :password, :password_confirmation)
       end
 end
