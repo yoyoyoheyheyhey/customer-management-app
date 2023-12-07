@@ -1,7 +1,4 @@
 <h1 class="text-3xl text-gray-700">メニュー登録</h1>
-
-<%= flash[:alert] %>
-
 <% if @menu.errors.any? %>
   <ul>
     <% @menu.errors.full_messages.each do |message| %>
