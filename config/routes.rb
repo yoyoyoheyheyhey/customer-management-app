@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  root to: 'admins#index'
+  root to: 'customers#index'
   resources :admins do
     member do
       delete :destroy_icon
