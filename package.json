@@ -3,6 +3,7 @@
   "dependencies": {
     "autoprefixer": "latest",
     "postcss": "latest",
+    "preline": "^2.0.2",
     "tailwindcss": "latest"
   },
   "scripts": {

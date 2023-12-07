@@ -1,7 +1,5 @@
 <h1 class="text-3xl text-gray-700">顧客情報詳細</h1>
 
-<%= flash[:notice] %>
-
 <div class="py-8">
   <div class="flex flex-col bg-white border rounded shadow-md py-20">
     <div class="flex justify-center">
@@ -27,15 +25,35 @@
       </div>
     </div>
     <div class="flex justify-center mt-10 space-x-2">
-      <%= link_to "編集", edit_customer_path(@customer), class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
-      <%= link_to "削除", customer_path(@customer), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+      <%=
+        link_to "編集",
+        edit_customer_path(@customer),
+        class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+        style: "width: 100px;"
+      %>
+      <%=
+        link_to "削除",
+        customer_path(@customer),
+        data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+        class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+        style: "width: 100px;"
+      %>
     </div>
     <div class="flex justify-center mt-8">
       <%= link_to "戻る", customers_path, class: "text-gray-700 hover:text-gray-500" %>
     </div>
   </div>
   <div class="pt-20 flex flex-col">
-    <h2 class="text-2xl text-gray-700 pb-6">来店履歴</h2>
+    <div class="w-full flex" style="justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h2 class="text-2xl text-gray-700 pb-6">来店履歴</h2>
+      <%=
+        link_to "来店履歴作成",
+        new_customer_visit_history_path(customer_id: @customer.id),
+        class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+        style: "width: 120px;"
+      %>
+    </div>
+
     <div class="flex flex-col justify-center bg-white border rounded shadow-md p-20 space-y-5">
       <% if @customer_visit_history %>
         <div class="flex space-x-5">
@@ -52,7 +70,9 @@
           <% @customer_visit_histories.each do |customer_visit_history| %>
             <div class="flex flex-col bg-white border border-gray-300 py-5 my-2 hover:bg-gray-50">
               <div class="flex justify-center items-center text-gray-800">
-                <p class="text-md font-semibold text-gray-600"><%= customer_visit_history.visit_datetime.strftime("%Y年%m月%d日(%a)") %><span class=px-1></span><%= customer_visit_history.visit_datetime.strftime("%k:%M") %></p>
+                <p class="font-semibold text-gray-600">
+                  <%= I18n.l customer_visit_history.visit_datetime, format: :long %>
+                </p>
               </div>
               <div class="flex-1 my-10">
                 <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
@@ -63,8 +83,17 @@
                 <% end %>
               </div>
               <div class="flex justify-center space-x-2 items-center">
-                <%= link_to '編集', edit_customer_visit_history_path(customer_visit_history.id), class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
-                <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+                <%=
+                  link_to '編集',
+                  edit_customer_visit_history_path(customer_visit_history.id),
+                  class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                %>
+                <%=
+                  link_to '削除',
+                  customer_visit_history_path(customer_visit_history.id),
+                  data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+                  class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                %>
               </div>
             </div>
           <% end %>

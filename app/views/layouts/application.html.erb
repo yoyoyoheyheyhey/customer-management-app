@@ -98,6 +98,8 @@
 
       <%# メインコンテンツ %>
       <div class="w-full pt-10 px-12 lg:ps-96">
+        <div><%= flash[:notice] %></div>
+        <div><%= flash[:alert] %></div>
         <div class="py-10">
           <%= yield %>
         </div>

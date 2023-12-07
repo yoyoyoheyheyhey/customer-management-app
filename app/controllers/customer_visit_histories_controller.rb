@@ -4,7 +4,9 @@ class CustomerVisitHistoriesController < ApplicationController
   before_action :fetch_customer, only: %i[create edit update destroy]
 
   def new
-    @customer_visit_history = CustomerVisitHistory.new
+    @customer_visit_history = CustomerVisitHistory.new(
+      params[:customer_id] ? { customer_id: params["customer_id"] } : {}
+    )
     @customer_visit_history.selected_menu_snapshots.new
   end
 

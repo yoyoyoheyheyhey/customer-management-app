@@ -16,9 +16,15 @@
 
         <div class="flex justify-center py-8">
           <% if params[:action] == 'edit' %>
-            <%= f.submit class: "block py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-700 cursor-pointer" %>
+            <%=
+              f.submit "更新",
+              type: 'button', class: 'py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+            %>
           <% else %>
-            <%= f.submit class: "block py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-gray-900 text-white hover:bg-gray-700 cursor-pointer" %>
+            <%=
+              f.submit "新規登録",
+              class: 'py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+            %>
           <% end %>
         </div>
       <% end %>
