@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  has_one_attached :image 
+  has_many_attached :image 
   has_many :customer_visit_histories, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }

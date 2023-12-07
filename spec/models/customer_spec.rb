@@ -14,7 +14,7 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'associations' do
-    it { should have_one_attached(:image) }
+    it { should have_many_attached(:image) }
   end
 
   describe '.ransackable_attributes' do
