@@ -33,7 +33,7 @@
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.id %></td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.name %></td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.phone_number %></td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.remarks %></td>
+                  <td class="px-6 py-4 max-w-md overflow-hidden text-ellipsis line-clamp-2 text-sm font-medium text-gray-800"><%= customer.remarks %></td>
                 </tr>
               <% end %>
             <% end %>
