@@ -6,7 +6,6 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-white">
             <tr>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">アイコン</th>
               <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :name, "名前") %></th>
               <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">メールアドレス</th>
             </tr>
@@ -14,8 +13,9 @@
           <tbody class="divide-y divide-gray-200">
             <% if @admins %>
               <% @admins.each do |admin| %>
-                  <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800"><%= admin.name %></td>
-                  <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800"><%= admin.email %></td>
+                <tr onclick="window.location='<%= admin_path(admin) %>'" class="hover:bg-gray-50 bg-white cursor-pointer">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= admin.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= admin.email %></td>
                 </tr>
               <% end %>
             <% end %>

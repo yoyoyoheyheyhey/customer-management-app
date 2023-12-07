@@ -19,8 +19,19 @@
     </div>
     <div class="flex justify-center space-x-1">
       <% if current_admin.id === @admin.id %>
-        <%= link_to "編集", edit_admin_registration_path, class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-yellow-900 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:pointer-events-none" %>
-        <%= link_to "削除", admin_path(@admin), class: "py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+        <%=
+          link_to "編集",
+          edit_admin_registration_path,
+          class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+          style: "width: 100px;"
+        %>
+        <%=
+          link_to "削除",
+          admin_path(@admin),
+          data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+          class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+          style: "width: 100px;"
+        %>
       <% end %>
     </div>
     <div class="mt-8 flex justify-center">
