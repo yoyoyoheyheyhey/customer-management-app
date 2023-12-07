@@ -1,7 +1,5 @@
 <h1 class="text-3xl text-gray-700">顧客新規作成</h1>
 
-<%= flash[:alert] %>
-
 <% if @customer.errors.any? %>
   <ul>
     <% @customer.errors.full_messages.each do |message| %>
