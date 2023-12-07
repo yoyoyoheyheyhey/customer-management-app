@@ -35,7 +35,7 @@
         link_to "削除",
         customer_path(@customer),
         data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
-        class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+        class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
         style: "width: 100px;"
       %>
     </div>
@@ -61,7 +61,9 @@
           <% @customer_visit_histories.each do |customer_visit_history| %>
             <div class="flex flex-col bg-white border border-gray-300 py-5 my-2 hover:bg-gray-50">
               <div class="flex justify-center items-center text-gray-800">
-                <p class="text-md font-semibold text-gray-600"><%= customer_visit_history.visit_datetime.strftime("%Y年%m月%d日(%a)") %><span class=px-1></span><%= customer_visit_history.visit_datetime.strftime("%k:%M") %></p>
+                <p class="font-semibold text-gray-600">
+                  <%= I18n.l customer_visit_history.visit_datetime, format: :long %>
+                </p>
               </div>
               <div class="flex-1 my-10">
                 <% customer_visit_history.selected_menu_snapshots.sort_by(&:name_at_time).each do |selected_menu_snapshot| %>
@@ -75,9 +77,14 @@
                 <%=
                   link_to '編集',
                   edit_customer_visit_history_path(customer_visit_history.id),
-                  class: "py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 %>
-                <%= link_to '削除', customer_visit_history_path(customer_visit_history.id), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "py-1 px-1.5 inline-flex items-center gap-x-2 text-xs font-medium rounded border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none" %>
+                <%=
+                  link_to '削除',
+                  customer_visit_history_path(customer_visit_history.id),
+                  data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+                  class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                %>
               </div>
             </div>
           <% end %>
