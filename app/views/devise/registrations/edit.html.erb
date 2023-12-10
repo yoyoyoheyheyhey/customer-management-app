@@ -6,10 +6,6 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div>
-          <div class="flex justify-center">
-            <%= f.label :icon, class: "text-sm font-medium" %>
-          </div>
-
           <div class="flex flex-col pb-8">
             <%= f.label :name, class: "block text-sm font-medium mb-2" %>
             <%= f.text_field :name, class: "py-3 pl-4 pr-20 border block border-gray-300 rounded text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none", autofocus: true, autocomplete: "name" %>
