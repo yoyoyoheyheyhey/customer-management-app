@@ -1,0 +1,118 @@
+<h1 class="text-3xl text-gray-700">アーカイブ</h1>
+
+<div class="flex flex-col mt-10 pb-10">
+  <div class="-m-1.5 overflow-x-auto space-y-14">
+    <div class="p-1.5 min-w-full inline-block align-middle">
+      <h2 class="text-2xl text-gray-700">アカウント</h2>
+      <div class="border overflow-hidden dark:border-gray-100 shadow-md rounded mt-3">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-white">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :name, "名前") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">メールアドレス</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% if @admins %>
+              <% @admins.each do |admin| %>
+                <tr class="bg-white cursor-pointer">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= admin.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= admin.email %></td>
+                  <td class="space-x-3">
+                    <%=
+                      link_to "復元",
+                      undiscard_admin_super_admin_path(admin),
+                      class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    %>
+                    <%=
+                      link_to "削除",
+                      super_admin_path(admin),
+                      data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+                      class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="p-1.5 min-w-full inline-block align-middle">
+      <h2 class="text-2xl text-gray-700">顧客</h2>
+      <div class="border overflow-hidden dark:border-gray-100 shadow-md rounded mt-3">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-white">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :id, "ID") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :name, "名前") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">電話番号</th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">備考</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% if @customers %>
+              <% @customers.each do |customer| %>
+                <tr class="bg-white cursor-pointer">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.id %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= customer.phone_number %></td>
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                    <div class="max-w-md overflow-hidden text-ellipsis line-clamp-2">
+                    <%= customer.remarks %>
+                    </div>
+                  </td>
+                  <td class="space-x-3">
+                    <%=
+                      link_to "復元",
+                      undiscard_customer_super_admin_path(customer),
+                      class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    %>
+                    <%=
+                      link_to "削除",
+                      customer_path(customer),
+                      data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+                      class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="p-1.5 min-w-full inline-block align-middle">
+      <h2 class="text-2xl text-gray-700">メニュー</h2>
+      <div class="border overflow-hidden dark:border-gray-100 shadow-md rounded mt-3">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-white">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :id, "ID") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"><%= sort_link(@q, :name, "メニュー名") %></th>
+              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">価格</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% if @menus %>
+              <% @menus.each do |menu| %>
+                <tr class="bg-white cursor-pointer">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= menu.id %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= menu.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= menu.price %>円</td>
+                  <td>
+                    <%=
+                      link_to "復元",
+                      undiscard_menu_super_admin_path(menu),
+                      class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

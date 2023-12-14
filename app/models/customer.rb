@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  include Discard::Model
   has_many_attached :image 
   has_many :customer_visit_histories, dependent: :destroy
 

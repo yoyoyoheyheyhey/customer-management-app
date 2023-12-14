@@ -1,6 +1,8 @@
 class SuperAdminsController < ApplicationController
   before_action :if_not_super_admin
-  before_action :set_admin, only: %i[show edit update destroy]
+  before_action :set_admin, only: %i[show edit update discard destroy undiscard_admin]
+  before_action :set_menu, only: :undiscard_menu
+  before_action :set_customer, only: :undiscard_customer
 
   def show
   end
@@ -40,8 +42,43 @@ class SuperAdminsController < ApplicationController
 
   def destroy
     @admin.destroy!
-    flash[:notice] = 'アカウントを削除しました'
+    flash[:notice] = "#{@admin.name}を削除しました"
     redirect_to admins_url
+  end
+
+  def discard
+    @admin.discard
+    flash[:notice] = "#{@admin.name}をアーカイブしました"
+    redirect_to admins_url
+  end
+
+  def discarded
+    @q = Admin.discarded.ransack(params[:q])
+    @admins = @q.result
+
+    @q = Menu.discarded.ransack(params[:q])
+    @menus = @q.result
+
+    @q = Customer.discarded.ransack(params[:q])
+    @customers = @q.result
+  end
+
+  def undiscard_admin
+    @admin.undiscard
+    flash[:notice] = "#{@admin.name}を復元しました"
+    redirect_to admins_url
+  end
+
+  def undiscard_menu
+    @menu.undiscard
+    flash[:notice] = "#{@menu.name}を復元しました"
+    redirect_to menus_url
+  end
+
+  def undiscard_customer
+    @customer.undiscard
+    flash[:notice] = "#{@customer.name}様を復元しました"
+    redirect_to customers_url
   end
   
   private
@@ -52,6 +89,14 @@ class SuperAdminsController < ApplicationController
     
     def set_admin
       @admin = Admin.find(params[:id])
+    end
+
+    def set_menu
+      @menu = Menu.find(params[:id])
+    end
+
+    def set_customer
+      @customer = Customer.find(params[:id])
     end
 
     def admin_params

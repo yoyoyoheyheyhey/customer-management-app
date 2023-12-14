@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_action :set_admin, only: %i[show edit update destroy]
 
   def index
-    @q = Admin.ransack(params[:q])
+    @q = Admin.kept.ransack(params[:q])
     @admins = @q.result
   end
 

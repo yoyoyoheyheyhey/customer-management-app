@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_10_053353) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_14_092439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_10_053353) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "admin", default: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_admins_on_discarded_at"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -70,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_10_053353) do
     t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_customers_on_discarded_at"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -77,6 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_10_053353) do
     t.bigint "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_menus_on_discarded_at"
   end
 
   create_table "selected_menu_snapshots", force: :cascade do |t|
