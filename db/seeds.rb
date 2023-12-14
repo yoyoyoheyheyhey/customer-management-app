@@ -1,6 +1,6 @@
 Admin.create!(
-  name: "上田 大輔",
-  email: "ueda@sample.com",
+  name: "管理者",
+  email: "admin@sample.com",
   password: "password",
   password_confirmation: "password",
   admin: true
