@@ -1,4 +1,5 @@
 class Menu < ApplicationRecord
+  include Discard::Model
   has_paper_trail
   has_many :selected_menu_snapshots
 

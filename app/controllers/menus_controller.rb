@@ -2,7 +2,7 @@ class MenusController < ApplicationController
   before_action :set_menu, only: %i[show edit update destroy]
 
   def index
-    @q = Menu.ransack(params[:q])
+    @q = Menu.kept.ransack(params[:q])
     @menus = @q.result
   end
 
@@ -38,8 +38,8 @@ class MenusController < ApplicationController
   end
 
   def destroy
-    @menu.destroy
-    flash[:notice] = 'メニューを更新しました'
+    @menu.discard
+    flash[:notice] = "#{@menu.name}を削除しました"
     redirect_to menus_url
   end
 

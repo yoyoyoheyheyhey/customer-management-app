@@ -39,10 +39,10 @@
         style: "width: 100px;"
       %>
       <%=
-        link_to "削除",
-        customer_path(@customer),
-        data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
-        class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+        link_to "アーカイブ",
+        discard_customer_path(@customer),
+        data: { turbo_method: :delete, turbo_confirm: '本当にアーカイブしますか?' },
+        class: "flex justify-center content-center py-3 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
         style: "width: 100px;"
       %>
     </div>

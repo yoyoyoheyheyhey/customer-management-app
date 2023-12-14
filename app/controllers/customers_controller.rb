@@ -1,9 +1,9 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[show edit update destroy]
-  before_action :set_customer_visit_history, only: %i[show]
+  before_action :set_customer, only: %i[show edit update destroy discard]
+  before_action :set_customer_visit_history, only: :show
 
   def index
-    @q = Customer.ransack(params[:q])
+    @q = Customer.kept.ransack(params[:q])
     @customers = @q.result
   end
 
@@ -42,7 +42,13 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-		flash[:notice] = '顧客情報を更新しました'
+		flash[:notice] = "#{@customer.name}を削除しました"
+    redirect_to customers_url
+  end
+
+  def discard
+    @customer.discard
+		flash[:notice] = "#{@customer.name}様をアーカイブしました"
     redirect_to customers_url
   end
 
