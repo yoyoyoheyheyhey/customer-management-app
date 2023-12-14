@@ -2,7 +2,8 @@ Admin.create!(
   name: "上田 大輔",
   email: "ueda@sample.com",
   password: "password",
-  password_confirmation: "password"
+  password_confirmation: "password",
+  admin: true
 )
 
 5.times do |i|
