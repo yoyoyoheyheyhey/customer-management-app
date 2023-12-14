@@ -21,8 +21,22 @@
       <% if current_admin.id == @admin.id %>
         <%=
           link_to "編集",
-          edit_admin_path(@admin),
+          edit_super_admin_path(@admin),
           class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+          style: "width: 100px;"
+        %>
+      <% else %>
+        <%=
+          link_to "編集",
+          edit_super_admin_path(@admin),
+          class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
+          style: "width: 100px;"
+        %>
+        <%=
+          link_to "削除",
+          super_admin_path(@admin),
+          data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+          class: "flex justify-center content-center py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600",
           style: "width: 100px;"
         %>
       <% end %>
