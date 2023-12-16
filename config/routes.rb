@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :admins, only: [:index, :show, :edit, :update]
   resources :customers do
     member do
+      get 'hairstyle_images'
+      patch 'create_images'
+      delete 'destroy_image'
       delete 'discard'
     end
   end

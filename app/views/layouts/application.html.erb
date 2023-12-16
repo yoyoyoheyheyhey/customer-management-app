@@ -11,8 +11,6 @@
   </head>
 
   <body class="bg-white">
-    <p><%= notice %></p>
-    <p><%= alert %></p>
     <% if admin_signed_in? %>
       <div class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
         <div class="flex items-center py-4">
@@ -119,16 +117,17 @@
         </div>
       </div>
 
-      <%# メインコンテンツ %>
       <div class="w-full pt-10 px-12 lg:ps-96">
-        <div><%= flash[:notice] %></div>
-        <div><%= flash[:alert] %></div>
+        <div class="flash"><%= flash[:notice] %></div>
+        <div class="flash"><%= flash[:alert] %></div>
         <div class="py-10">
           <%= yield %>
         </div>
       </div>
     <% else %>
       <div class="flex justify-center w-full pt-10 px-4 sm:px-6 md:px-8">
+        <div class="flash"><%= flash[:notice] %></div>
+        <div class="flash"><%= flash[:alert] %></div>
         <div class="p-10 w-6/12 text-center">
           <%= yield %>
         </div>
