@@ -1,0 +1,52 @@
+<h1 class="text-3xl text-gray-700">顧客画像一覧</h1>
+
+<div class="mt-3 w-full flex" style="justify-content: end">
+  <%= form_with(model: @customer, url: create_images_customer_path(@customer), method: :patch, id: :form, local: true) do |f| %>
+    <label class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 cursor-pointer">
+      <%
+        concat(
+          content_tag(:svg, class: 'flex-shrink-0 w-5 h-5', xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round') do
+            concat(tag.path 'stroke-linecap': 'round', 'stroke-linejoin': 'round', d: 'M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z')
+          end
+        )
+        concat("画像登録")
+      %>
+      <%= f.file_field :images, :class => "hidden"  %>
+    </label>
+  <% end %>
+</div>
+
+
+<div class="p-1.5 min-w-full inline-block align-middle">
+  <h2 class="text-2xl text-gray-700"><%= @customer.name + " 様の画像一覧" %></h2>
+  <div class="border overflow-hidden dark:border-gray-100 shadow-md rounded mt-3">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-white">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">ID</th>
+          <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">画像</th>
+          <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">画像名</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% if @customer.images %>
+          <% @customer.images.each do |image| %>
+            <tr class="bg-white cursor-pointer">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= image.id %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= image_tag image, class: "border border-gray-200" %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%= image.filename %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                <%=
+                  link_to "削除",
+                  destroy_image_customer_path(image.id),
+                  data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
+                  class: "flex justify-center content-center py-1 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-900 text-white hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

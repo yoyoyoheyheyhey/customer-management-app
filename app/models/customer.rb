@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
   include Discard::Model
-  has_many_attached :image 
+  has_many_attached :images 
   has_many :customer_visit_histories, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
