@@ -94,15 +94,18 @@
                   </span>
                 <% end %>
               </li>
-              <% if current_admin.admin? %>
-                <li>
-                  <%= link_to(discarded_super_admins_path) do %>
-                    <span class="w-full flex items-center rounded-lg gap-x-3.5 py-2 px-2.5 text-lg text-gray-400 hover:bg-gray-800 hover:text-white">
-                      <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
-                      アーカイブ
-                    </span>
-                  <% end %>
-                </li>
+              <%# NOTE: アーカイブの動線は一旦隠す %>
+              <% if false %>
+                <% if current_admin.admin? %>
+                  <li>
+                    <%= link_to(discarded_super_admins_path) do %>
+                      <span class="w-full flex items-center rounded-lg gap-x-3.5 py-2 px-2.5 text-lg text-gray-400 hover:bg-gray-800 hover:text-white">
+                        <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
+                        アーカイブ
+                      </span>
+                    <% end %>
+                  </li>
+                <% end %>
               <% end %>
             </ul>
           </nav>
@@ -126,8 +129,6 @@
       </div>
     <% else %>
       <div class="flex justify-center w-full pt-10 px-4 sm:px-6 md:px-8">
-        <div class="flash"><%= flash[:notice] %></div>
-        <div class="flash"><%= flash[:alert] %></div>
         <div class="p-10 w-6/12 text-center">
           <%= yield %>
         </div>
